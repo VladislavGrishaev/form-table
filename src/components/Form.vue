@@ -236,13 +236,4 @@ const sendDataForm = () => {
         transform: translate(-50%, -50%) rotate(360deg);
     }
 }
-
-/*.loading-button.loading .button-text {*/
-/*    opacity: 0;*/
-/*}*/
-
-/*.loading-button.loading .spinner {*/
-/*    opacity: 1;*/
-/*}*/
-
 </style>
