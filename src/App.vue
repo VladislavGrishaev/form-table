@@ -1,14 +1,19 @@
 <script setup>
-import Layout from "./layouts/Layout.vue";
-import Tabs from "./components/NavTabs.vue";
+
+import NavTabs from "./components/NavTabs.vue";
 import '../src/assets/style.css'
+import Form from "./components/Form.vue";
+import Table from "./components/Table.vue";
 
 </script>
 
 <template>
-  <Tabs/>
-  <Layout/>
-
+  <NavTabs/>
+<!--  <router-view/>-->
+  <Form/>
+  <Table/>
 </template>
+
+
 
 
