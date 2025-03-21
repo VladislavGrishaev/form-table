@@ -3,7 +3,6 @@ import {computed, reactive, ref} from "vue";
 import {useFormStore} from "../store";
 
 const store = useFormStore();
-const formData = ref(store.formData);
 const isSubmitting = ref(false);
 
 // Объект для хранения ошибок
@@ -46,17 +45,17 @@ const isValidDone = computed(() => {
 
 // имитация отправки
 const sendDataForm = () => {
-	isSubmitting.value = true;
-	store.saveData();
+   isSubmitting.value = true;
+
 
  setTimeout(()=>{
+   store.saveData();
 
    isSubmitting.value = false
 		 store.clearData();
 
  }, 2000)
 }
-
 
 </script>
 

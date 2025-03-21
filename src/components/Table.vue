@@ -1,4 +1,12 @@
 <script setup>
+import {computed, onMounted, ref} from "vue";
+import {useFormStore} from "../store";
+
+// Используем store для получения данных пользователей
+const store = useFormStore();
+
+// Следим за изменениями в usersData с помощью computed
+const usersData = computed(() => store.usersData);
 
 
 </script>
@@ -12,14 +20,21 @@
 								<th>Дата рождения</th>
 								<th>Телефон</th>
 								<th>Email</th>
+								<th>Удалить</th>
 						</tr>
 						</thead>
 						<tbody>
-						<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+						<tr
+								v-for="user in usersData"
+								:key="user.id"
+						>
+								<td>{{ user.fullName }}</td>
+								<td>{{ user.birthDate }}</td>
+								<td>{{ user.phone }}</td>
+								<td>{{ user.email }}</td>
+								<td>
+										<button>Удалить</button>
+								</td>
 						</tr>
 						</tbody>
 				</table>

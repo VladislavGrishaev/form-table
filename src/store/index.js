@@ -26,6 +26,9 @@ export const useFormStore = defineStore("form", {
 
       // Сохраняем массив в localStorage
       localStorage.setItem('usersData', JSON.stringify(this.usersData));
+
+      const savedUsersData = JSON.parse(localStorage.getItem('usersData')) || [];
+      console.log(savedUsersData);
     },
 
     // Очищаем текущие данные формы (не удаляя данные из localStorage)
