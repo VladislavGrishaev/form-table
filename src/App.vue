@@ -7,9 +7,11 @@ import '../src/assets/style.css'
 
 <template>
   <NavTabs/>
-  <transition name="fade-slide" mode="out-in">
-    <router-view />
-  </transition>
+  <router-view v-slot="{ Component }">
+    <transition name="fade-slide" mode="out-in">
+      <component :is="Component" />
+    </transition>
+  </router-view>
 </template>
 
 <style scoped>
