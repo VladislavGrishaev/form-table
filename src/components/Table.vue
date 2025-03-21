@@ -1,13 +1,13 @@
 <script setup>
-import {computed, onMounted, ref} from "vue";
+import {computed} from "vue";
 import {useFormStore} from "../store";
 
-// Используем store для получения данных пользователей
 const store = useFormStore();
 
-// Следим за изменениями в usersData с помощью computed
 const usersData = computed(() => store.usersData);
 
+
+const deleteUser = (id) => store.deleteData(id);
 
 </script>
 
@@ -33,7 +33,7 @@ const usersData = computed(() => store.usersData);
 								<td>{{ user.phone }}</td>
 								<td>{{ user.email }}</td>
 								<td>
-										<button>Удалить</button>
+										<button @click="deleteUser(user.id)">Удалить</button>
 								</td>
 						</tr>
 						</tbody>

@@ -11,27 +11,40 @@ export const useFormStore = defineStore("form", {
         phone: '',
         email: ''
       },
-      usersData: savedUsers
+      usersData: savedUsers,
+      userExists: false
     };
   },
 
   actions: {
     saveData() {
       const newUserData = {
-        ...this.formData
+        ...this.formData,
+        id: this.usersData.length
       };
 
-      // Добавляем нового пользователя в массив
+      // Проверяем, есть ли такой пользователь с одинаковыми данными
+      const isDuplicate = this.usersData.some(user =>
+        user.fullName === newUserData.fullName &&
+        user.birthDate === newUserData.birthDate &&
+        user.phone === newUserData.phone &&
+        user.email === newUserData.email
+      );
+
+      if (isDuplicate) {
+        this.userExists = true;
+        return;
+      }
+
+      this.userExists = false;
       this.usersData.push(newUserData);
 
-      // Сохраняем массив в localStorage
       localStorage.setItem('usersData', JSON.stringify(this.usersData));
 
       const savedUsersData = JSON.parse(localStorage.getItem('usersData')) || [];
       console.log(savedUsersData);
     },
 
-    // Очищаем текущие данные формы (не удаляя данные из localStorage)
     clearData() {
       this.formData = {
         fullName: '',
@@ -41,10 +54,14 @@ export const useFormStore = defineStore("form", {
       };
     },
 
-    // Удаляем все данные о пользователях (если нужно)
-    deleteData() {
-      localStorage.removeItem('usersData');
-      this.usersData = []; // Очистка массива
+    deleteData(id) {
+      this.usersData = this.usersData.filter(user => user.id !== id);
+      this.usersData = this.usersData.map((user, index) => {
+        user.id = index;
+        return user;
+      });
+
+      localStorage.setItem('usersData', JSON.stringify(this.usersData));
     }
   },
 });

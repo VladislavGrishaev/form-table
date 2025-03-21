@@ -135,6 +135,10 @@ const sendDataForm = () => {
 												class="spinner"></span>
 						</button>
 				</form>
+				<div
+								v-if="store.userExists"
+								class="form__has-user"
+				>Пользователь с такими данными уже существует.</div>
 		</div>
 </template>
 
@@ -164,9 +168,6 @@ const sendDataForm = () => {
     border-color: #000;
 }
 
-.error {
-    border-color: red
-}
 
 .form__error {
     position: absolute;
@@ -175,6 +176,11 @@ const sendDataForm = () => {
     color: red;
     font-size: 12px;
     margin-top: 5px;
+}
+
+.form__has-user {
+    margin: 10px 0 0 0;
+    color: red;
 }
 
 .form__send-data {
